@@ -1,9 +1,9 @@
 # Games101
 
 ## Lecutre
-[X] Lecture 1 -5
-[ ] 本周Lecture 6 - 8
+- [X] Lecture 1 -5
+- [ ] 本周Lecture 6 - 8
 
 ## Hw
-[X] hw0 和 hw1 
-[ ] 本周hw2
+- [X] hw0 和 hw1 
+- [ ] 本周hw2
