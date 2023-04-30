@@ -44,5 +44,5 @@
 - 对于每个像素遍历4次，对4个采样点计算是否超过z值
 - 最后对一个像素的4个采样点的颜色加权平均即可
 
-
+![image-20230423152043046](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230423152043046.png)
 
