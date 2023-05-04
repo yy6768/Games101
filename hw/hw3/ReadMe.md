@@ -175,4 +175,34 @@ u，v对应纹理图的坐标，w,h对应方向右和上的方向
 
 ## 提高
 
-TODO
+### bilinear
+
+![image-20230501101545733](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230501101545733.png)
+
+代码实现非常简单，这里就不展示了，只需要对上下左右4个像素点调用getColor最后线性加权平均即可
+
+![image-20230501101320756](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230501101320756.png)
+
+- 左边二插值，右边普通渲染，可以看到在颜色边缘处的像素会做更丰富的过渡处理
+
+
+
+### 其他模型
+
+感觉很怪
+
+很糊很糊
+
+![image-20230501104536496](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230501104536496.png)
+
+crate更是重量级
+
+![image-20230501105321965](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230501105321965.png)
+
+感觉必须在代码中修改才能出现一定效果
+
+
+
+bunny好小
+
+![image-20230501105722904](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230501105722904.png)

@@ -120,7 +120,7 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     if (payload.texture)
     {
         // TODO: Get the texture value at the texture coordinates of the current fragment
-        return_color = payload.texture->getColor(payload.tex_coords.x(), payload.tex_coords.y());
+        return_color = payload.texture->getColorBilinear(payload.tex_coords.x(), payload.tex_coords.y());
     }
     Eigen::Vector3f texture_color;
     texture_color << return_color.x(), return_color.y(), return_color.z();
@@ -248,13 +248,13 @@ Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payl
     auto w = payload.texture->width;
     auto h = payload.texture->height;
 
-    auto dU = kh * kn * (payload.texture->getColor(u + 1.0f / w, v).norm() - payload.texture->getColor(u, v).norm());
-    auto dV = kh * kn * (payload.texture->getColor(u, v + 1.0f / h).norm() - payload.texture->getColor(u, v).norm());
+    auto dU = kh * kn * (payload.texture->getColorBilinear(u + 1.0f / w, v).norm() - payload.texture->getColorBilinear(u, v).norm());
+    auto dV = kh * kn * (payload.texture->getColorBilinear(u, v + 1.0f / h).norm() - payload.texture->getColorBilinear(u, v).norm());
 
     // Vector ln = (-dU, -dV, 1)
     Eigen::Vector3f ln{ -dU, -dV, 1 };
     // Position p = p + kn * n * h(u,v)
-    point += (kn * normal * payload.texture->getColor(u, v).norm());
+    point += (kn * normal * payload.texture->getColorBilinear(u, v).norm());
     // Normal n = normalize(TBN * ln)
     normal = TBN * ln;
     normal.normalized();
@@ -326,8 +326,8 @@ Eigen::Vector3f bump_fragment_shader(const fragment_shader_payload& payload)
     auto w = payload.texture->width;
     auto h = payload.texture->height;
 
-    auto dU = kh * kn * (payload.texture->getColor(u + 1.0f / w, v).norm() - payload.texture->getColor(u, v).norm());
-    auto dV = kh * kn * (payload.texture->getColor(u, v + 1.0f / h).norm() - payload.texture->getColor(u, v).norm());
+    auto dU = kh * kn * (payload.texture->getColorBilinear(u + 1.0f / w, v).norm() - payload.texture->getColorBilinear(u, v).norm());
+    auto dV = kh * kn * (payload.texture->getColorBilinear(u, v + 1.0f / h).norm() - payload.texture->getColorBilinear(u, v).norm());
 
     // Vector ln = (-dU, -dV, 1)
     Eigen::Vector3f ln{ -dU, -dV, 1 };
@@ -350,10 +350,10 @@ int main(int argc, const char** argv)
 
     std::string filename = "output.png";
     objl::Loader Loader;
-    std::string obj_path = "C:/Users/12587/games_model/models/spot/";
+    std::string obj_path = "C:/Users/12587/games_model/models/bunny/";
 
     // Load .obj File
-    bool loadout = Loader.LoadFile("C:/Users/12587/games_model/models/spot/spot_triangulated_good.obj");
+    bool loadout = Loader.LoadFile("C:/Users/12587/games_model/models/bunny/bunny.obj");
     for(auto mesh:Loader.LoadedMeshes)
     {
         for(int i=0;i<mesh.Vertices.size();i+=3)
@@ -385,7 +385,7 @@ int main(int argc, const char** argv)
         {
             std::cout << "Rasterizing using the texture shader\n";
             active_shader = texture_fragment_shader;
-            texture_path = "spot_texture.png";
+            texture_path = "crate_1.jpg";
             r.set_texture(Texture(obj_path + texture_path));
         }
         else if (argc == 3 && std::string(argv[2]) == "normal")

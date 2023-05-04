@@ -3,10 +3,12 @@
 ## Lecutre
 - [X] Lecture 1 - 5
 - [x] Lecture 6 - 8
-- [ ] Lecture 9 - 11
+- [x] Lecture 9 - 11
+- [ ] Lecture 12- 14
 
 ## Hw
 - [X] hw0 
 - [X] hw1 
 - [x] hw2
 - [x] hw3
+- [x] hw4
