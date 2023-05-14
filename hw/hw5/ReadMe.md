@@ -7,7 +7,7 @@
   - 光线生成
   - 光线与三角的相交
 
-- 源码在：
+- 源码在：[yy6768/Games101: 学习Games101的笔记和自己的作业解决 (github.com)](https://github.com/yy6768/Games101)
 
 ## Task#1：光线的生成
 

@@ -1,5 +1,9 @@
 # Games101 作业4
 
+## 前言
+
+- 源码位于：[yy6768/Games101: 学习Games101的笔记和自己的作业解决 (github.com)](https://github.com/yy6768/Games101)
+
 ## 要求
 
 - 实现De CasteLjau算法

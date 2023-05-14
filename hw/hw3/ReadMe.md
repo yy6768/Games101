@@ -1,13 +1,15 @@
 # Games101 作业3
 
+## 前言
+
+- 源码在：[yy6768/Games101: 学习Games101的笔记和自己的作业解决 (github.com)](https://github.com/yy6768/Games101)
+
 ## 目标
 
 - 参数插值: 正确插值颜色、法向量、纹理坐标、位置
 - Blinn-phong 反射模型
 - Texture mapping
 - Bump mapping 和Displacement mapping
-
-
 
 加分项
 

@@ -5,6 +5,7 @@
 - 实现z-buffering
 - 加分项-实现anti-aliasing
 
+- 源码在[yy6768/Games101: 学习Games101的笔记和自己的作业解决 (github.com)](https://github.com/yy6768/Games101)
 
 
 ## 基本目标
