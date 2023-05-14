@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <fstream>
 #include "Vector.hpp"
 #include "Renderer.hpp"
@@ -14,7 +15,7 @@ Vector3f reflect(const Vector3f &I, const Vector3f &N)
 }
 
 // [comment]
-// Compute refraction direction using Snell's law
+// Compute refraction direction using Snell's law（折射定律）
 //
 // We need to handle with care the two possible situations:
 //
@@ -38,7 +39,7 @@ Vector3f refract(const Vector3f &I, const Vector3f &N, const float &ior)
 }
 
 // [comment]
-// Compute Fresnel equation
+// Compute Fresnel equation（菲涅尔方程）
 //
 // \param I is the incident view direction
 //
@@ -223,14 +224,14 @@ void Renderer::Render(const Scene& scene)
         for (int i = 0; i < scene.width; ++i)
         {
             // generate primary ray direction
-            float x;
-            float y;
             // TODO: Find the x and y positions of the current pixel to get the direction
             // vector that passes through it.
+            float x = ((i + 0.5f) * 2.0f / scene.width - 1.0f) * scale * imageAspectRatio;
+            float y = (1.0f - 2.0f * ((j + 0.5f) / scene.height)) * scale;
             // Also, don't forget to multiply both of them with the variable *scale*, and
             // x (horizontal) variable with the *imageAspectRatio*            
 
-            Vector3f dir = Vector3f(x, y, -1); // Don't forget to normalize this direction!
+            Vector3f dir = normalize( Vector3f(x, y, -1)); // Don't forget to normalize this direction!
             framebuffer[m++] = castRay(eye_pos, dir, scene, 0);
         }
         UpdateProgress(j / (float)scene.height);
