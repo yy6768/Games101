@@ -403,3 +403,155 @@ flux的另一解释- 单位时间光子通过传感器的数量
   - 直接除以$4\pi$得到intensity
 
 ![image-20230506141407341](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230506141407341.png)
+
+
+
+# Lecture 15
+
+## 课程内容
+
+- radiometry
+- 反射方程/渲染方程
+- 全局光照
+- 简单概率论复习
+
+
+
+## 复习
+
+- 考虑单位时间的能量（功率 lm = lumen）
+- 光线强度：intensity，立体角上的能量
+
+![image-20230515093655547](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515093655547.png)
+
+
+
+## Irridiance
+
+- 定义$E(x) = \frac {d \Phi(x)}{dA}$
+
+- 单位：lux
+
+  ![image-20230515094211832](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515094211832.png)
+
+### Lambert‘s Cosine law
+
+![image-20230515094452023](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515094452023.png)
+
+
+
+### Correction：Irradiance falloff
+
+![image-20230515094636509](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515094636509.png)
+
+- Irradiance 衰减，Intensity不变
+
+
+
+## Radiance
+
+- 为了描述光在传播时具有的属性
+
+- 定义：
+
+  - 单位立体角单位面积上的power
+
+  - 在单位面积上光的朝向不一定垂直与面，计算正交于面的辐射
+
+    ![image-20230515094816209](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515094816209.png)
+
+- radiance和irradiance和intensity的关系
+
+![image-20230515095144501](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515095144501.png)
+
+![image-20230515095442473](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515095442473.png)
+
+- $E(p)$在dA处收到的能量
+- $L_i(p,\omega)$在表面的积分就是所有方向的能量
+- 所以所有方向接受的radiance就是irradiance在dA表面收到的能量
+
+
+
+## BRDF（双向反射分布函数）
+
+![image-20230515095825209](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515095825209.png)
+
+- BRDF描述光线反射后各个方向的能量分布
+- 根据radiance可以计算irradiance
+
+
+
+### BRDF定义
+
+![image-20230515100232525](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515100232525.png)
+
+单位是1/sr(sr是立体角弧度)
+
+
+
+![image-20230515100646961](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515100646961.png)
+
+- 将定义分母移到左边，同时积分，得到反射的radiance
+
+- 已知BRDF可以得到任何方向的反射的irradiance
+
+
+
+## 渲染方程
+
+- 渲染方程由两个部分组成
+  - 自身发光
+  - 受到的反射光
+
+![image-20230515103636482](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515103636482.png)
+
+- 注意所有向量都向外（$\omega_i$也是朝外）
+- $\Omega^+$表示忽略下半部分的面积只考虑一半
+
+- 解方程：Lecture 16
+
+
+
+### 反射方程/渲染方程的理解
+
+- 初步的反射方程
+
+![image-20230515104044377](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515104044377.png)
+
+- 进一步求和
+
+  ![image-20230515104116575](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515104116575.png)
+
+- 面光源（将面光源变为点光源的集合）
+
+  ![image-20230515104142584](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515104142584.png)
+
+- 其他表面的反射（变成渲染方程）
+
+  ![image-20230515104235571](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515104235571.png)
+
+- 递归+简化
+
+  ![image-20230515104358325](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515104358325.png)
+
+- 线性算子方程
+
+  ![image-20230515104510903](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515104510903.png)
+
+- 级数展开
+
+  ![image-20230515104807163](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515104807163.png)
+
+- 光栅化和光线追踪的关系（前两项）
+
+  ![image-20230515105036804](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230515105036804.png)
+
+
+
+## 概率论复习
+
+- 随机变量：可能去多个值的数
+- 分布：描述随机变量取值的概率
+
+- 期望
+- 随机变量的函数
