@@ -5,5 +5,5 @@ hw/hw3/shading
 hw/hw4/bezier_curve
 hw/hw5/ray_tracing
 hw/hw6/bvh
-hw/hw7
-hw/hw8
+hw/hw7/ray_tracing
+hw/hw8/mass_spring_system

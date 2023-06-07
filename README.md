@@ -6,6 +6,7 @@
 - [x] Lecture 9 - 11
 - [x] Lecture 12 - 14
 - [x] Lecture 15 - 17
+- [ ] Lecture 18 - 20
 
 ## Hw
 - [X] hw0 
@@ -14,3 +15,5 @@
 - [x] hw3
 - [x] hw4
 - [x] hw5
+- [x] hw6
+- [x] hw7

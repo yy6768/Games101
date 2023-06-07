@@ -2,7 +2,7 @@
 
 ## 前言
 
-- hw5主题：物体划分算法 Bounding Volume Hierarchy (BVH)
+- hw6主题：物体划分算法 Bounding Volume Hierarchy (BVH)
 
 - 任务：
 

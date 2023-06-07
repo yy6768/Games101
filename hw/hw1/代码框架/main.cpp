@@ -69,7 +69,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
 
     projection = ortho1 * ortho2 * proToOr * projection;
     
-
+    std::cout << projection<<std::endl ;
     return projection;
 }
 
@@ -124,8 +124,8 @@ int main(int argc, const char** argv)
         r.clear(rst::Buffers::Color | rst::Buffers::Depth);
         Vector3f axis;
         axis << 0, 10.0f, 0;
-        //r.set_model(get_model_matrix(angle));
-        r.set_model(get_rotation(axis, angle));
+        r.set_model(get_model_matrix(angle));
+        //r.set_model(get_rotation(axis, angle));
         r.set_view(get_view_matrix(eye_pos));
         r.set_projection(get_projection_matrix(45, 1, 0.1, 50));
 

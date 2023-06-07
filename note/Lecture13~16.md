@@ -555,3 +555,186 @@ flux的另一解释- 单位时间光子通过传感器的数量
 
 - 期望
 - 随机变量的函数
+
+
+
+# Lecture 16
+
+## 课程内容
+
+- 蒙特卡洛积分
+- 路径积分
+
+## Review
+
+- 辐射度量学
+- 光照反射
+  - 反射方程
+  - 渲染方程
+- 全局光照
+- 概率论复习
+
+
+
+![image-20230520195635896](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520195635896.png)
+
+
+
+## 蒙特卡洛积分
+
+- 问题：函数比较复杂，不好使用数值解析方法进行积分
+- 黎曼积分：把积分域微分为若干份（1000份）计算构成的小方块的面积
+- 蒙特卡洛积分：对函数值进行采样多次，最后进行平均，模拟出积分的值
+
+![image-20230520200740539](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520200740539.png)
+
+- Notes：
+  - 采样次数越多，得到结果越准
+  - 对x进行采样，也要对x积分
+
+
+
+## Path Tracing
+
+- Whitted-style ray tracing:
+  - 光线只关注反射和折射
+  - 在散射表面停止弹射
+
+![image-20230520205000344](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520205000344.png)
+
+- 问题1：不同的材质
+  - mirror:pure specular（纯镜面反射） 
+  - Glossy：有粗糙度
+
+![image-20230520205019190](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520205019190.png)
+
+- 问题2：diffuse 材质也会有反射（color bleeding)
+
+  ![image-20230520205315365](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520205315365.png)
+
+
+
+## 蒙特卡洛方程解渲染方程
+
+![image-20230520214109457](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520214109457.png)
+
+对于这一个点的直接光照是什么？来自于四面八方
+
+![image-20230520214626269](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520214626269.png)
+
+- 忽略直接光照，只计算散射
+
+  - 这个散射是一个积分，可以使用蒙特卡洛方法来进行计算
+  - 半球面的$\omega_i$是均匀采样
+
+  ![image-20230520214738262](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520214738262.png)
+
+  ![image-20230520214921925](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520214921925.png)
+
+- 着色算法
+
+  ![image-20230520215054544](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230520215054544.png)
+
+
+
+## 间接光照情况
+
+![image-20230521092609012](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521092609012.png)
+
+- $-\omega_i$表示从Q到P点（$\omega_i$表示P到Q)
+
+![image-20230521092543893](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521092543893.png)
+
+
+
+- 问题：
+
+  - 光线数量爆炸
+
+    ![image-20230521092832316](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521092832316.png)
+
+  - N=1时不会光线数量爆炸，叫做**路径追踪**
+
+    ![image-20230521092945555](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521092945555.png)
+
+    ![image-20230521093206437](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521093206437.png)
+
+  - 通过生成多条光线来追踪不同路径
+
+    ![image-20230521093255457](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521093255457.png)
+
+- 问题2：递归不终止
+
+  ![image-20230521093407974](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521093407974.png)
+
+  - 解决方法：俄罗斯轮盘赌
+
+    ![image-20230521093546679](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521093546679.png)
+
+    概率p（超参数），打出光线，返回的结果除以p，1-p的概率不打出光线，期望不变
+
+    ![image-20230521093750122](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521093750122.png)
+
+- 结果：
+
+  - lowSPP（每像素投出光线数量少）效果不好
+
+  ![image-20230521094031070](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521094031070.png)
+
+- 如何优化LowSPP情况
+
+  ![image-20230521094145129](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521094145129.png)
+
+  - 光源小，大部分打出的光线都浪费了
+
+  - 解决方法：在光源上采样：
+
+  - 但是蒙特卡洛积分又不能使用了：
+
+    ![image-20230521094539794](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521094539794.png)
+
+  - dA和$d\omega$的关系：:star:
+
+    ![image-20230521094653632](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521094653632.png)
+
+    ![image-20230521094851514](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521094851514.png)
+
+    转换成dA的积分
+
+  - 算法改进：
+
+    ![image-20230521095040856](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521095040856.png)
+
+    - 光源直接对这个点的贡献（不需要轮盘赌）
+    - 其他物体的反射，需要轮盘赌
+
+    ![image-20230521095459477](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521095459477.png)
+
+![image-20230521095728700](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521095728700.png)
+
+## 更多概念
+
+- ray-tracing：所有光线追踪方法的集合
+
+- 更morden的方法：
+
+  - 光子映射
+  - 梅特罗波利斯光传输
+  - VCM/UPBP
+
+  ![image-20230521095851283](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521095851283.png)
+
+
+
+- 采样理论
+
+  ![image-20230521100102045](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521100102045.png)
+
+- 更多知识（path tracing虽然难，仍然是导论）
+  - gamma 矫正
+  - 曲线
+  - 颜色空间
+  - pixel reconstruction filter
+
+![image-20230521100300913](http://typora-yy.oss-cn-hangzhou.aliyuncs.com/img/image-20230521100300913.png)
+
