@@ -18,4 +18,4 @@ finished
 - [x] hw5
 - [x] hw6
 - [x] hw7
-- [ ] hw8
+- [x] hw8
