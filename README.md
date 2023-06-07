@@ -2,12 +2,13 @@
 
 ## Lecutre
 - [X] Lecture 1 - 5
-- [x] Lecture 6 - 8
-- [x] Lecture 9 - 11
-- [x] Lecture 12 - 14
-- [x] Lecture 15 - 17
-- [ ] Lecture 18 - 20
-
+- [X] Lecture 6 - 8
+- [X] Lecture 9 - 11
+- [X] Lecture 12 - 14
+- [X] Lecture 15 - 17
+- [X] Lecture 18 - 20
+- [X] Lecture 21 - 22
+finished
 ## Hw
 - [X] hw0 
 - [X] hw1 
@@ -17,3 +18,4 @@
 - [x] hw5
 - [x] hw6
 - [x] hw7
+- [ ] hw8
