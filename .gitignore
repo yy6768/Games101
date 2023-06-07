@@ -7,3 +7,6 @@ hw/hw5/ray_tracing
 hw/hw6/bvh
 hw/hw7/ray_tracing
 hw/hw8/mass_spring_system
+
+hw/hw8/.vscode
+hw/hw8/build
